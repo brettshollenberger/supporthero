@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150214090548) do
+ActiveRecord::Schema.define(version: 20150214092446) do
 
   create_table "availabilities", force: true do |t|
     t.integer  "calendar_date_id", null: false
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 20150214090548) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "first_name",                          null: false
+    t.string   "last_name",                           null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
