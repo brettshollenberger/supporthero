@@ -3,7 +3,6 @@ class CalendarDate < ActiveRecord::Base
 
   validates_uniqueness_of :day, :scope => [:month, :year]
   validates_presence_of :month, :day, :year
-
   validates :month, :inclusion => { :in => (1..12).to_a }
   validate :day, :day_in_month?
 
