@@ -102,6 +102,15 @@ describe CalendarDate do
   end
 
   describe "validations" do
+    it "is valid with valid date" do
+      expect(calendar_date).to be_valid
+    end
+
+    it "is invalid with no month" do
+      calendar_date.month = nil
+      expect(calendar_date).to_not be_valid
+    end
+
     it "is invalid if month is less than 1" do
       calendar_date.month = 0
       expect(calendar_date).to_not be_valid
@@ -112,7 +121,28 @@ describe CalendarDate do
       expect(calendar_date).to_not be_valid
     end
 
+    it "is invalid if day is nil" do
+      calendar_date.day = nil
+      expect(calendar_date).to_not be_valid
+    end
+
     it "is invalid if day is not in month" do
+      calendar_date.day = 0
+      expect(calendar_date).to_not be_valid
+
+      calendar_date.month = 2
+      expect(calendar_date.days_in_month).to eq 28
+
+      calendar_date.day = 28
+      expect(calendar_date).to be_valid
+
+      calendar_date.day = 29
+      expect(calendar_date).to_not be_valid
+    end
+
+    it "is invalid if year is nil" do
+      calendar_date.year = nil
+      expect(calendar_date).to_not be_valid
     end
   end
 end
