@@ -1,4 +1,7 @@
 class CalendarDate < ActiveRecord::Base
+  has_many :availabilities
+
+  validates_uniqueness_of :day, :scope => [:month, :year]
   validates_presence_of :month, :day, :year
 
   validates :month, :inclusion => { :in => (1..12).to_a }

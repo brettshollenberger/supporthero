@@ -144,5 +144,15 @@ describe CalendarDate do
       calendar_date.year = nil
       expect(calendar_date).to_not be_valid
     end
+
+    it "is invalid if a duplicate calendar date exists" do
+      params = {month: 1, day: 1, year: 2015}
+
+      CalendarDate.create(params)
+
+      duplicate_date = CalendarDate.new(params)
+
+      expect(duplicate_date).to_not be_valid
+    end
   end
 end
