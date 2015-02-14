@@ -31,5 +31,15 @@ describe Availability do
       availability.calendar_date = nil
       expect(availability).to_not be_valid
     end
+
+    it "validates unique combination of user and calendar_date" do
+      params = {user: user, calendar_date: calendar_date}
+
+      Availability.create(params)
+
+      duplicate_availability = Availability.new(params)
+
+      expect(duplicate_availability).to_not be_valid
+    end
   end
 end
