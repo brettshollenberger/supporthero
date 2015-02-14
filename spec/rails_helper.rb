@@ -3,6 +3,8 @@ require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 
+Dir[File.expand_path(File.join(__FILE__, "../support/**/*"))].each { |f| require f }
+
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
@@ -12,7 +14,7 @@ RSpec.configure do |config|
 
   config.infer_spec_type_from_file_location!
 
-  config.after(:suite) do
+  config.before(:all) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
   end
@@ -24,4 +26,6 @@ RSpec.configure do |config|
   config.after(:each, :logsql) do
     ActiveRecord::Base.logger = nil
   end
+
+  config.include Requests::JsonHelpers, type: :request
 end
