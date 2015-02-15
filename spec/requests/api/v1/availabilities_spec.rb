@@ -56,6 +56,7 @@ describe "Availabilities API :" do
           expect(json.length).to eq(10)
           expect(json.first.user.first_name).to eq(user.first_name)
           expect(json.first.calendar_date.month).to eq(1)
+          expect(json.first.calendar_date.day_of_week).to eq("Thursday")
         end
       end
 

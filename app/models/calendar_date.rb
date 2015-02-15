@@ -7,6 +7,10 @@ class CalendarDate < ActiveRecord::Base
   validates :month, :inclusion => { :in => (1..12).to_a }
   validate :day, :day_in_month?
 
+  def day_of_week
+    DayOfWeekConverter.convert(month: month, day: day, year: year).to_s.capitalize
+  end
+
   def leap_year?
     Calendar.leap_year?(year)
   end
