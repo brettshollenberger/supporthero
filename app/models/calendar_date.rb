@@ -1,4 +1,5 @@
 class CalendarDate < ActiveRecord::Base
+  has_one :assignment
   has_many :availabilities
 
   validates_uniqueness_of :day, :scope => [:month, :year]
