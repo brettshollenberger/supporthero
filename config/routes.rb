@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :api, :defaults => {:format => :json} do
     namespace :v1 do
       resources :availabilities, :only => [:index, :show, :create, :destroy]
+      resources :assignments, :only => [:index, :show, :create, :destroy]
     end
   end
 end

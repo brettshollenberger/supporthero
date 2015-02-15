@@ -1,31 +1,31 @@
 module Api
   module V1
-    class AvailabilitiesController < APIController
+    class AssignmentsController < APIController
       def index
         rescue_401_or_404 do
-          @availabilities = Availability.where(queryable_params).includes(:user, :calendar_date)
+          @assignments = Assignment.where(queryable_params).includes(:user, :calendar_date)
         end
       end
 
       def show
         rescue_401_or_404 do
-          @availability = Availability.find(params[:id])
+          @assignment = Assignment.find(params[:id])
         end
       end
 
       def create
-        @availability = Availability.new(availabilities_params)
+        @assignment = Assignment.new(assignments_params)
 
-        render :show and return if @availability.save
+        render :show and return if @assignment.save
           
         render unprocessable_entity
       end
 
       def destroy
         rescue_401_or_404 do
-          @availability = current_user.availabilities.find(params[:id])
+          @assignment = current_user.assignments.find(params[:id])
 
-          render deleted and return if !@availability.nil? && @availability.destroy
+          render deleted and return if !@assignment.nil? && @assignment.destroy
           render not_permitted
         end
       end
@@ -35,7 +35,7 @@ module Api
         params.permit(:user_id, :calendar_date_id)
       end
 
-      def availabilities_params
+      def assignments_params
         params.permit(:user_id, :calendar_date_id)
       end
     end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Availabilities API :" do
+describe "Assignments API :" do
   before(:all) do
     Calendar.create_dates_in_year(2015)
 
@@ -11,21 +11,21 @@ describe "Availabilities API :" do
     next_five_days = first_month[5..9]
 
     first_five_days.each do |day|
-      FactoryGirl.create(:availability, user: user, calendar_date: day)
+      FactoryGirl.create(:assignment, user: user, calendar_date: day)
     end
 
     next_five_days.each do |day|
-      FactoryGirl.create(:availability, user: @other_user, calendar_date: day)
+      FactoryGirl.create(:assignment, user: @other_user, calendar_date: day)
     end
 
-    @availability = Availability.first
-    @other_users_availability = Availability.last
+    @assignment = Assignment.first
+    @other_users_assignment = Assignment.last
   end
 
   describe "Index Action :" do
     describe "When not logged in :" do
       before(:each) do
-        get api_v1_availabilities_path
+        get api_v1_assignments_path
       end
 
       it "It is not a successful request" do
@@ -40,19 +40,18 @@ describe "Availabilities API :" do
     describe "When logged in :" do
       before(:each) do
         login(user)
-
       end
 
       describe "When no query params are passed :" do
         before(:each) do
-          get api_v1_availabilities_path
+          get api_v1_assignments_path
         end
 
         it "It is a successful request" do
           expect(response).to be_success
         end
 
-        it "It responds with a list of all availabilities" do
+        it "It responds with a list of all assignments" do
           expect(json.length).to eq(10)
           expect(json.first.user.first_name).to eq(user.first_name)
           expect(json.first.calendar_date.month).to eq(1)
@@ -62,18 +61,18 @@ describe "Availabilities API :" do
 
       describe "Filtering by user :" do
         before(:each) do
-          get api_v1_availabilities_path, {user_id: user.id}
+          get api_v1_assignments_path, {user_id: user.id}
         end
 
         it "It is a successful request" do
           expect(response).to be_success
         end
 
-        it "filters out the given users' availabilities" do
+        it "filters out the given users' assignments" do
           expect(json.length).to eq(5)
 
-          json.each do |availability|
-            expect(availability.user.first_name).to eq(user.first_name)
+          json.each do |assignment|
+            expect(assignment.user.first_name).to eq(user.first_name)
           end
         end
       end
@@ -81,14 +80,14 @@ describe "Availabilities API :" do
       describe "Filtering by calendar_date :" do
         before(:each) do
           @first_date = CalendarDate.first
-          get api_v1_availabilities_path, {calendar_date_id: @first_date.id}
+          get api_v1_assignments_path, {calendar_date_id: @first_date.id}
         end
 
         it "It is a successful request" do
           expect(response).to be_success
         end
 
-        it "filters out the availabilities for the given calendar_date" do
+        it "filters out the assignments for the given calendar_date" do
           expect(json.length).to eq(1)
 
           expect(json.first.user.first_name).to eq(user.first_name)
@@ -100,7 +99,7 @@ describe "Availabilities API :" do
   describe "Show Action :" do
     describe "When not logged in :" do
       before(:each) do
-        get api_v1_availability_path(@availability)
+        get api_v1_assignment_path(@assignment)
       end
 
       it "It is not a successful request" do
@@ -115,29 +114,29 @@ describe "Availabilities API :" do
     describe "When logged in :" do
       before(:each) do
         login(user)
-        get api_v1_availability_path(@availability)
+        get api_v1_assignment_path(@assignment)
       end
 
       it "It is a successful request" do
         expect(response).to be_success
       end
 
-      it "It responds with the user's availability" do
-        expect(json.calendar_date.month).to eql(@availability.calendar_date.month)
+      it "It responds with the user's assignment" do
+        expect(json.calendar_date.month).to eql(@assignment.calendar_date.month)
       end
     end
   end
 
   describe "Create Action :" do
     before(:each) do
-      def valid_availability_json
+      def valid_assignment_json
         { :format => :json, :user_id => user.id, :calendar_date_id => CalendarDate.last.id }
       end
     end
 
     describe "When not logged in :" do
       before(:each) do
-        post api_v1_availabilities_path(valid_availability_json)
+        post api_v1_assignments_path(valid_assignment_json)
       end
 
       it "is not a successful request" do
@@ -154,16 +153,16 @@ describe "Availabilities API :" do
         login(user)
       end
 
-      describe "If I create a valid availability :" do
+      describe "If I create a valid assignment :" do
         before(:each) do
-          post api_v1_availabilities_path(valid_availability_json)
+          post api_v1_assignments_path(valid_assignment_json)
         end
 
         it "It is a successful request" do
           expect(response).to be_success
         end
 
-        it "It renders the recently created availability" do
+        it "It renders the recently created assignment" do
           expect(json.user.first_name).to eql(user.first_name)
         end
       end
@@ -173,7 +172,7 @@ describe "Availabilities API :" do
   describe "Delete Action :" do
     describe "When not logged in :" do
       before(:each) do
-        delete api_v1_availability_path(@availability)
+        delete api_v1_assignment_path(@assignment)
       end
 
       it "It is not successful" do
@@ -190,31 +189,31 @@ describe "Availabilities API :" do
         login(user)
       end
 
-      describe "When the user may delete the availability :" do
+      describe "When the user may delete the assignment :" do
         before(:each) do
-          delete api_v1_availability_path(@availability)
+          delete api_v1_assignment_path(@assignment)
         end
 
         it "is a successful request" do
           expect(response).to be_success
         end
 
-        it "returns a message stating that the availability" do
+        it "returns a message stating that the assignment has been removed" do
           expect(json.message).to eql("Resource successfully deleted.")
         end
       end
 
-      describe "When the user may not delete the availablity :" do
+      describe "When the user may not delete the assignment :" do
         before(:each) do
-          delete api_v1_availability_path(@other_users_availability)
+          delete api_v1_assignment_path(@other_users_assignment)
         end
 
         it "is not a successful request" do
           expect(response).to_not be_success
         end
 
-        it "returns a message stating the not permitted error" do
-          expect(json.error).to eql("You don't have permission to view or modify that resource")
+        it "does not display resource to the user" do
+          expect(json.error).to eql("Resource not found")
         end
       end
     end
