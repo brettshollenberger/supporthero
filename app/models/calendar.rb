@@ -8,8 +8,8 @@ class Calendar
       (year % 4 == 0) && (year % 100 != 0 || year % 400 == 0)
     end
 
-    def month_name(month)
-      month_names[month-1]
+    def month_name(month_number)
+      month_names[month_number-1]
     end
 
     def days_in_month_in_year(month, year)
