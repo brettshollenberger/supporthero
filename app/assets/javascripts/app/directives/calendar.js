@@ -7,11 +7,11 @@ angular
         var date = new Date(),
             year = date.getUTCFullYear();
 
+        scope.year     = year;
         scope.calendar = new Calendar();
+        scope.month    = 2
 
         scope.calendar.loadYear(year);
-
-        scope.month = 2
       }
     }
   }]);
