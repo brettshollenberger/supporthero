@@ -8,6 +8,13 @@
 rake db:create && db:migrate
 ```
 
+* Seeding Data:
+
+```bash
+YEAR=2015 rake calendar:add_year
+rake db:seed
+```
+
 * How to run the test suite: 
 
 ```bash

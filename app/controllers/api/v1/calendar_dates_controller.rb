@@ -5,7 +5,8 @@ module Api
         rescue_401_or_404 do
           @calendar_dates = CalendarDate.where(queryable_params)
                                         .includes(assignment: [:user], 
-                                                  availabilities: [:user])
+                                                  availabilities: [:user],
+                                                  holiday: [])
         end
       end
 

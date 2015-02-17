@@ -19,6 +19,14 @@ angular
           return Availability.new(availability);
         });
       }
+
+      this.weekend = function() {
+        return _.include(["Saturday", "Sunday"], this.day_of_week);
+      }
+
+      this.needsAssignment = function() {
+        return this.assignable && this.upcoming && _.isUndefined(this.assignment);
+      }
     }
 
     return CalendarDate;

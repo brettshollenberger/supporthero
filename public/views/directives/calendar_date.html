@@ -1,6 +1,8 @@
 <div class="calendar-date-header">
+  <div class="assigned-indicator" ng-show="date.assignment.user == currentUser"></div>
+  <div class="needs-assignment-indicator" ng-show="currentUser.admin && date.needsAssignment()"></div>
   <span ng-show="date.day == 1 && date.month != monthNumber">
     {{date.month | month}}
   </span>
-  {{date.day}}
+  <span>{{date.day}}</span>
 </div>

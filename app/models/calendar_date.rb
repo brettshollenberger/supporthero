@@ -20,6 +20,10 @@ class CalendarDate < ActiveRecord::Base
     %w(Saturday Sunday)
   end
 
+  def upcoming?(today=Date.today)
+    (0..14).to_a.include?((to_date - today).numerator)
+  end
+
   def assignable?
     !(weekend? || holiday?)
   end
@@ -48,6 +52,10 @@ class CalendarDate < ActiveRecord::Base
     unless month_name.nil? || year.nil?
       Calendar.days_in_month_in_year(month, year)
     end
+  end
+
+  def to_date
+    Date.new(year, month, day)
   end
 
 private

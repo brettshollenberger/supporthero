@@ -100,6 +100,14 @@ describe CalendarDate do
     expect(calendar_date.days_in_month).to eq 31
   end
 
+  it "is upcoming if the date is between today and 2 weeks from today" do
+    expect(calendar_date.upcoming?(today=calendar_date.to_date)).to           be true
+    expect(calendar_date.upcoming?(today=calendar_date.to_date - 2.weeks)).to be true
+    expect(calendar_date.upcoming?(today=calendar_date.to_date - 3.weeks)).to be false
+    expect(calendar_date.upcoming?(today=calendar_date.to_date - 1.year)).to  be false
+    expect(calendar_date.upcoming?(today=calendar_date.to_date + 3.weeks)).to be false
+  end
+
   describe "Assignability, Holidays & Weekends" do
     before(:all) do
       Calendar.create_dates_in_year(2015)

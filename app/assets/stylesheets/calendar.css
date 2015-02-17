@@ -126,3 +126,18 @@
   border-radius: 0 3px 3px 0;
 }
 
+.assigned-indicator,
+.needs-assignment-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  float: left;
+}
+
+.assigned-indicator {
+  background-color: $green;
+}
+
+.needs-assignment-indicator {
+  background-color: $pink;
+}
