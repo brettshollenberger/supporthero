@@ -1,3 +1,4 @@
+json.id assignment.id
 json.url api_v1_assignment_path(assignment)
 
 json.user do

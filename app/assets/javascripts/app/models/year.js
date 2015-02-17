@@ -1,6 +1,6 @@
 angular
   .module('supporthero')
-  .factory('Year', ['Month', function(Month) {
+  .factory('Year', ['Month', 'CalendarDate', function(Month, CalendarDate) {
 
     function Year(params) {
       var year = this;
@@ -22,9 +22,13 @@ angular
         .flatMap(function(response) {
           return response.data;
         })
+        .map(function(calendarDate) {
+          return CalendarDate.new(calendarDate);
+        })
         .subscribe(function(calendarDate) {
           year.calendarDates.push(calendarDate);
-        }, function() {
+        }, function(error) {
+          console.log(error);
         }, function() {
           year.splitMonths();
           loadSubject.onNext(year);

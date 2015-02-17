@@ -1,3 +1,4 @@
+json.id availability.id
 json.url api_v1_availability_path(availability)
 
 json.user do
