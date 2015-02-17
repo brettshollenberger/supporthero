@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217072059) do
+ActiveRecord::Schema.define(version: 20150217090822) do
 
   create_table "assignments", force: true do |t|
     t.integer  "calendar_date_id", null: false
@@ -28,11 +28,12 @@ ActiveRecord::Schema.define(version: 20150217072059) do
   end
 
   create_table "calendar_dates", force: true do |t|
-    t.integer  "month",      null: false
-    t.integer  "day",        null: false
-    t.integer  "year",       null: false
+    t.integer  "month",       null: false
+    t.integer  "day",         null: false
+    t.integer  "year",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "day_of_week", null: false
   end
 
   create_table "holidays", force: true do |t|

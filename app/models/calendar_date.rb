@@ -8,11 +8,17 @@ class CalendarDate < ActiveRecord::Base
   validates :month, :inclusion => { :in => (1..12).to_a }
   validate :day, :day_in_month?
 
+  before_create :set_day_of_week
+
   scope :holiday,     -> { includes(:holiday).where.not(:holidays => {:calendar_date_id => nil}) }
   scope :not_holiday, -> { includes(:holiday).where(:holidays => {:calendar_date_id => nil}) }
-  scope :weekend,     -> { all.select { |d| d.weekend? } }
-  scope :not_weekend, -> { all.select { |d| !d.weekend? } }
-  scope :assignable,  -> { not_holiday.select { |d| !d.weekend? } }
+  scope :weekend,     -> { where("day_of_week IN (?)", weekend_days) }
+  scope :not_weekend, -> { where("day_of_week NOT IN (?)", weekend_days) }
+  scope :assignable,  -> { not_holiday.not_weekend }
+
+  def self.weekend_days
+    %w(Saturday Sunday)
+  end
 
   def assignable?
     !(weekend? || holiday?)
@@ -28,10 +34,6 @@ class CalendarDate < ActiveRecord::Base
 
   def readable
     "#{day_of_week}, #{month_name.capitalize} #{day}, #{year}"
-  end
-
-  def day_of_week
-    DayOfWeekConverter.convert(month: month, day: day, year: year).to_s.capitalize
   end
 
   def leap_year?
@@ -53,5 +55,9 @@ private
     if days_in_month.nil? || !(1..days_in_month).to_a.include?(day)
       errors.add(:day, "is not included in the current month")
     end
+  end
+
+  def set_day_of_week
+    send("day_of_week=", DayOfWeekConverter.convert(month: month, day: day, year: year).to_s.capitalize)
   end
 end
