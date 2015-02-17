@@ -3,10 +3,10 @@
 
 <h5>Support Hero:</h5>
 <p>
-  {{selectedDate.assignment.user.fullName()}}
+  {{selectedDate.assignment.user | username}}
 </p>
 
 <h5>Availabilities: </h5>
 <div ng-repeat="availability in selectedDate.availabilities">
-  {{availability.user.fullName()}}
+  <p>{{availability.user | username}}</p>
 </div>

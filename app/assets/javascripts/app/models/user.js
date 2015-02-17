@@ -22,10 +22,9 @@ angular
           url: "api/v1/users/me"
         })
         .map(function(response) {
-          return new User(response.data);
+          return User.new(response.data);
         })
         .subscribe(function(user) {
-          User.cached.cache(user);
           User.cached["current_user"] = user;
 
           subject.onNext(user);
