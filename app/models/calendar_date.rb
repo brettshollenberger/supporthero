@@ -1,11 +1,28 @@
 class CalendarDate < ActiveRecord::Base
   has_one :assignment
+  has_one :holiday
   has_many :availabilities
 
   validates_uniqueness_of :day, :scope => [:month, :year]
   validates_presence_of :month, :day, :year
   validates :month, :inclusion => { :in => (1..12).to_a }
   validate :day, :day_in_month?
+
+  def assignable?
+    !(weekend? || holiday?)
+  end
+
+  def holiday?
+    !!holiday
+  end
+
+  def weekend?
+    %w(Saturday Sunday).include?(day_of_week)
+  end
+
+  def readable
+    "#{day_of_week}, #{month_name.capitalize} #{day}, #{year}"
+  end
 
   def day_of_week
     DayOfWeekConverter.convert(month: month, day: day, year: year).to_s.capitalize

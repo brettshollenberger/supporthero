@@ -24,6 +24,8 @@ class Calendar
       dates_in_year(year).each do |date|
         CalendarDate.create(date)
       end
+
+      Holiday.create_holidays_for_year(2015)
     end
 
     def dates_in_year(year)

@@ -21,5 +21,15 @@ Assignment.delete_all
   calendar_date = CalendarDate.where(month: month, day: day, year: year).first
 
   Assignment.create(calendar_date: calendar_date, user: user)
-
 end
+
+[
+  %w(Sherry Boris), %w(Boris Matte Jack), %w(Vicente Sherry), %w(Matte Jack Sherry), %w(Jack Franky),
+  %w(Sherry Boris Luis), %w(Matte Kevin Vicente), %w(Kevin Jack Boris Luis Eadon), %w(Kevin Zoe Jay),
+  %w(Vicente), %w(Zoe Kevin), %w(Kevin Sherry), %w(Matte Zoe Luis), %w(Zoe James), %w(Jay Boris Eadon),
+  %w(Boris Luis James), %w(Eadon Franky Jack), %w(Sherry Zoe), %w(Franky Sherry), %w(Sherry Matte),
+  %w(Matte Franky Kevin), %w(Franky Boris), %w(Franky Vicente Luis), %w(Kevin Jack Sherry),
+  %w(Boris Jay James), %w(Franky Luis Eadon), %w(Vicente Zoe), %w(Luis Boris), %w(Eadon Matte),
+  %w(Boris Kevin Matte), %w(Kevin Matte Jay), %w(Matte Jay James), %w(Jay Boris), %w(James Kevin),
+  %w(Kevin Sherry), %w(Sherry Boris), %w(Sherry), %w(Jack Boris), %w(Sherry Matte), %w(Jack Zoe)
+]

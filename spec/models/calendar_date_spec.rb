@@ -12,7 +12,7 @@ describe CalendarDate do
   end
 
   it "has a year" do
-    expect(calendar_date.year).to eq 2015
+    expect(calendar_date.year).to eq 2073
   end
 
   it "is a leap year if year is divisible by 4 && (!divisible by 100 || divisible by 400)" do
@@ -49,7 +49,6 @@ describe CalendarDate do
     calendar_date.month = 2
     expect(calendar_date.days_in_month).to eq 29
   end
-
 
   it "has 31 days in March" do
     calendar_date.month = 3
@@ -99,6 +98,53 @@ describe CalendarDate do
   it "has 31 days in December" do
     calendar_date.month = 12
     expect(calendar_date.days_in_month).to eq 31
+  end
+
+  describe "Holidays & Weekends" do
+    before(:all) do
+      Calendar.create_dates_in_year(2015)
+    end
+
+    it "is a holiday if a holiday occurs on that day" do
+      expect(CalendarDate.where(month: 1, day: 1, year: 2015).first).to     be_holiday
+      expect(CalendarDate.where(month: 1, day: 2, year: 2015).first).to_not be_holiday
+    end
+
+    it "is a weekend if Saturday or Sunday" do
+      monday    = CalendarDate.where(month: 1, day: 5, year: 2015).first
+      tuesday   = CalendarDate.where(month: 1, day: 6, year: 2015).first
+      wednesday = CalendarDate.where(month: 1, day: 7, year: 2015).first
+      thursday  = CalendarDate.where(month: 1, day: 8, year: 2015).first
+      friday    = CalendarDate.where(month: 1, day: 9, year: 2015).first
+      saturday  = CalendarDate.where(month: 1, day: 10, year: 2015).first
+      sunday    = CalendarDate.where(month: 1, day: 11, year: 2015).first
+
+      [monday, tuesday, wednesday, thursday, friday].each do |day|
+        expect(day).to_not be_weekend
+      end
+
+      [saturday, sunday].each do |day|
+        expect(day).to be_weekend
+      end
+    end
+
+    it "is assignable if not weekend or holiday" do
+      monday = CalendarDate.where(month: 1, day: 5, year: 2015).first
+
+      expect(monday).to be_assignable
+    end
+
+    it "is not assignable if weekend" do
+      saturday  = CalendarDate.where(month: 1, day: 10, year: 2015).first
+
+      expect(saturday).to_not be_assignable
+    end
+
+    it "is not assignable if holiday" do
+      new_years_day = CalendarDate.where(month: 1, day: 1, year: 2015).first
+
+      expect(new_years_day).to_not be_assignable
+    end
   end
 
   describe "validations" do
