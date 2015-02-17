@@ -1,17 +1,34 @@
-<h1>Calendar</h1>
-
-<div class="controls-container">
-  <button prev-month month={{monthNumber}}>Previous Month</button>
-  <h2 class="month-name">{{monthNumber | month}}</h2>
-  <button next-month month={{monthNumber}}>Next Month</button>
+<div class="page-header">
+  <h3 class="logo">
+    Support<span class="normal-weight">Hero</span>
+  </h3>
 </div>
 
-<div class="notifications-container"></div>
+<div class="page-body row">
+  <div class="notifications-container col-sm-3"></div>
 
-<div class="calendar-container">
-  <div calendar></div>
-</div>
+  <div class="calendar-container col-sm-6">
+    <div class="controls-container row">
+      <div class="paginator-container col-sm-3">
+        <ul class="paginator small-block-grid even-2">
+          <li>
+            <button prev-month month={{monthNumber}} class="pink full">Previous</button>
+          </li>
+          <li>
+            <button next-month month={{monthNumber}} class="pink full">Next</button>
+          </li>
+        </ul>
+      </div>
 
-<div class="date-container">
-  <div selected-date={{selectedDate}}></div>
+      <div class="col-sm-9 calendar-month-year">
+        <h5 class="month-name">{{monthNumber | month}} <span class="normal-weight">{{year}}</h5>
+      </div>
+    </div>
+
+    <div calendar></div>
+  </div>
+
+  <div class="date-container col-sm-3">
+    <div selected-date={{selectedDate}}></div>
+  </div>
 </div>

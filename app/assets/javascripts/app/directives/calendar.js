@@ -23,6 +23,7 @@ angular
               return date.day == currentDate; 
             })[0];
 
+            scope.currentDate = scope.selectedDate;
             scope.month = year.months[scope.monthNumber];
             scope.$apply();
           });

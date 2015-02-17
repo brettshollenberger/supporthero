@@ -1,0 +1,11 @@
+@import 'constants';
+
+button {
+  &.green {
+    background-color: $green;
+  }
+
+  &.pink {
+    background-color: $pink;
+  }
+}
