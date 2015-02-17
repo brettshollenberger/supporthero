@@ -8,6 +8,10 @@ angular
       this.dates = [];
       this.weeks = [];
 
+      this.lastDay = function() {
+        return this.dates.slice(-1)[0];
+      }
+
       this.addDates = function() {
         var prevMonth = prevMonthDates.call(this),
             nextMonth = nextMonthDates.call(this);

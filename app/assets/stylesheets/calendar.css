@@ -52,6 +52,26 @@
   background-color: lightgrey;
 }
 
+.calendar-date-header {
+  border-top: 3px solid black;
+  border-bottom: 1px solid black;
+  text-align: center;
+  padding: 1px;
+  background-color: aliceblue;
+}
+
+.inactive .calendar-date-header {
+  background-color: grey;
+}
+
+.week-header {
+  float: left;
+  width: 14%;
+  height: 100%;
+  border: 1px solid black;
+  text-align: center;
+}
+
 .selected-date-header {
   border-bottom: 5px solid black;
   text-align: center;

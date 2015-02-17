@@ -1,1 +1,6 @@
-{{date.day_of_week}} Month: {{date.month}} Day: {{date.day}}
+<div class="calendar-date-header" ng-show="date.day_of_week">
+  <span ng-show="date.day == 1 && date.month != monthNumber">
+    {{date.month | month}}
+  </span>
+  {{date.day}}
+</div>

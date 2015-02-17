@@ -4,11 +4,12 @@ angular
     return {
       link: function(scope, element, attrs) {
         element.on("click", function() {
-          scope.month -= 1;
+          scope.monthNumber -= 1;
+          scope.month = scope.calendar.years[scope.year].months[scope.monthNumber];
 
-          if (scope.month <= 2) {
-            scope.calendar.loadYear(scope.year-1);
-          }
+          // if (scope.monthNumber <= 2) {
+          //   scope.calendar.loadYear(scope.year-1);
+          // }
 
           scope.$apply();
         });

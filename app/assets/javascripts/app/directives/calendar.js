@@ -7,9 +7,9 @@ angular
         var date        = new Date(),
             currentDate = date.getDate();
 
-        scope.year         = date.getUTCFullYear();
-        scope.month        = date.getMonth() + 1;
-        scope.calendar     = new Calendar();
+        scope.year        = date.getUTCFullYear();
+        scope.monthNumber = date.getMonth() + 1;
+        scope.calendar    = new Calendar();
 
         scope.selectDate = function(date) {
           scope.selectedDate = date;
@@ -19,9 +19,11 @@ angular
           .calendar
           .loadYear(scope.year)
           .subscribe(function(year) {
-            scope.selectedDate = _.filter(year.months[scope.month].dates, function(date) { 
+            scope.selectedDate = _.filter(year.months[scope.monthNumber].dates, function(date) { 
               return date.day == currentDate; 
             })[0];
+
+            scope.month = year.months[scope.monthNumber];
             scope.$apply();
           });
       }
