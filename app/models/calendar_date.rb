@@ -8,6 +8,12 @@ class CalendarDate < ActiveRecord::Base
   validates :month, :inclusion => { :in => (1..12).to_a }
   validate :day, :day_in_month?
 
+  scope :holiday,     -> { includes(:holiday).where.not(:holidays => {:calendar_date_id => nil}) }
+  scope :not_holiday, -> { includes(:holiday).where(:holidays => {:calendar_date_id => nil}) }
+  scope :weekend,     -> { all.select { |d| d.weekend? } }
+  scope :not_weekend, -> { all.select { |d| !d.weekend? } }
+  scope :assignable,  -> { not_holiday.select { |d| !d.weekend? } }
+
   def assignable?
     !(weekend? || holiday?)
   end

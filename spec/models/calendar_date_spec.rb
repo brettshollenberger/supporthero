@@ -100,7 +100,7 @@ describe CalendarDate do
     expect(calendar_date.days_in_month).to eq 31
   end
 
-  describe "Holidays & Weekends" do
+  describe "Assignability, Holidays & Weekends" do
     before(:all) do
       Calendar.create_dates_in_year(2015)
     end

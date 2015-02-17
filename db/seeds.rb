@@ -11,16 +11,11 @@ end
 
 Assignment.delete_all
 
-%w(Sherry Boris Vicente Matte Jack Sherry Matte Kevin Kevin Vicente Zoe Kevin Matte Zoe Jay Boris Eadon Sherry Franky Sherry Matte Franky Franky Kevin Boris Franky Vicente Luis Eadon Boris Kevin Matte Jay James Kevin Sherry Sherry Jack Sherry Jack).each.with_index do |first_name, index|
+CalendarDate.assignable.zip(%w(Sherry Boris Vicente Matte Jack Sherry Matte Kevin Kevin Vicente Zoe Kevin Matte Zoe Jay Boris Eadon Sherry Franky Sherry Matte Franky Franky Kevin Boris Franky Vicente Luis Eadon Boris Kevin Matte Jay James Kevin Sherry Sherry Jack Sherry Jack)).each do |(date, first_name)|
 
-  user          = User.where(first_name: first_name).first
-  date          = Date.today + index.days
-  month         = date.month
-  day           = date.day
-  year          = date.year
-  calendar_date = CalendarDate.where(month: month, day: day, year: year).first
+  user = User.where(first_name: first_name).first
 
-  Assignment.create(calendar_date: calendar_date, user: user)
+  Assignment.create(calendar_date: date, user: user)
 end
 
 [
