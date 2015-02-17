@@ -1,4 +1,16 @@
 <h1>Calendar</h1>
 
-<div calendar>
+<div class="controls-container">
+  <button prev-month month={{month}}>Previous Month</button>
+  <button next-month month={{month}}>Next Month</button>
+</div>
+
+<div class="notifications-container"></div>
+
+<div class="calendar-container">
+  <div calendar></div>
+</div>
+
+<div class="date-container">
+  <div selected-date={{selectedDate}}></div>
 </div>
