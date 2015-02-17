@@ -9,8 +9,13 @@ module Api
 
       def show
         rescue_401_or_404 do
-          @user = User.find(params[:id])
+          @user = User.find(show_id)
         end
+      end
+
+    private
+      def show_id
+        params[:id] == "me" ? current_user.id : params[:id]
       end
     end
   end
