@@ -1,12 +1,10 @@
-<div class="selected-date-header" ng-show="!!selectedDate.day_of_week">
-  {{selectedDate.day_of_week}}, {{selectedDate.month | month}} {{selectedDate.day}}
-</div>
+<h5>Selected Day</h5>
+<h6>{{selectedDate.day_of_week}}, {{selectedDate.month | month}} {{selectedDate.day}}</h6>
 
-<br>
-Support Hero: {{selectedDate.assignment.user.first_name}} {{selectedDate.assignment.user.last_name}}
+<h5>Support Hero:</h5>
+<p>{{selectedDate.assignment.user.first_name}} {{selectedDate.assignment.user.last_name}}</p>
 
-<br>
-Availabilities: 
+<h5>Availabilities: </h5>
 <div ng-repeat="availability in selectedDate.availabilities">
   {{availability.user.first_name}} {{availability.user.last_name}}
 </div>

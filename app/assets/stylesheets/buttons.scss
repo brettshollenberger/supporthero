@@ -8,4 +8,8 @@ button {
   &.pink {
     background-color: $pink;
   }
+
+  &:focus {
+    box-shadow: none;
+  }
 }
