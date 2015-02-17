@@ -9,8 +9,6 @@ angular
         if (_.isUndefined(this.years[year])) {
           this.years[year] = new Year(year);
           return this.years[year].load();
-        } else {
-          return Rx.Observable.from(this.years[year]);
         }
       }
     }
