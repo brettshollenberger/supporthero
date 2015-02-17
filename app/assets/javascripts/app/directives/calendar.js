@@ -1,6 +1,6 @@
 angular
   .module('supporthero')
-  .directive('calendar', ['Calendar', function(Calendar) {
+  .directive('calendar', ['Calendar', 'User', function(Calendar, User) {
     return {
       templateUrl: "views/directives/calendar.html",
       link: function(scope, element, attrs) {
@@ -14,6 +14,14 @@ angular
         scope.selectDate = function(date) {
           scope.selectedDate = date;
         }
+
+        User
+          .current_user()
+          .subscribe(function(user) {
+            scope.current_user = user;
+
+            console.log(scope.current_user);
+          });
 
         scope
           .calendar
