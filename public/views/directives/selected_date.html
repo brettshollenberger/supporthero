@@ -1,0 +1,10 @@
+<h5>Selected Day</h5>
+<h6>{{selectedDate.day_of_week}}, {{selectedDate.month | month}} {{selectedDate.day}}</h6>
+
+<h5>Support Hero:</h5>
+<p>{{selectedDate.assignment.user.first_name}} {{selectedDate.assignment.user.last_name}}</p>
+
+<h5>Availabilities: </h5>
+<div ng-repeat="availability in selectedDate.availabilities">
+  {{availability.user.first_name}} {{availability.user.last_name}}
+</div>

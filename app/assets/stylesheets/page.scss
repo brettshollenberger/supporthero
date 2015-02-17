@@ -1,0 +1,13 @@
+@import 'constants';
+
+.page-header {
+  height: 10%;
+  max-width: 100%;
+  border-bottom: 1px solid grey;
+  padding: $padding/2 $padding;
+}
+
+.page-body {
+  height: 90%;
+  max-width: 100%;
+}

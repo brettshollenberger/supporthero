@@ -1,0 +1,11 @@
+body {
+	color:#333;
+	background:#f9f9f9;
+}
+.row {
+	background:#f7f7f7;
+	> * {
+		background:#f6f6f6;
+		border:1px solid white;
+	}
+}

@@ -1,0 +1,60 @@
+@import 'constants';
+
+// Typography - All measurements come from base view font size - Example sizing 
+// in this document at 16px in case your designer asks you. All percentages are 
+// relative to their parent elements font size. For example div { font-size:50% }
+// with div div { font-size:100% } would result in the child div having a 50% 
+// font-size - .5 x 1;
+
+body {
+	font-family:$font-family;
+	font-size:1em;
+}
+
+.text-center {
+  text-align:center;
+}
+
+.text-left {
+  text-align:left;
+}
+
+.text-right {
+  text-align:right;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+	margin:0 0 $small-padding;
+	line-height:1.125; // Line Height of 18px;
+}
+h1 {
+	font-size:300%; // Size:48px;
+}
+h2 {
+	font-size:225%; // Size:36px;
+}
+h3 {
+	font-size:175%; // Size:28px;
+}
+h4 {
+	font-size:150%; // Size:24px;
+}
+h5 {
+	font-size:125%; // Size:20px;
+}
+h6 {
+	font-size:93.75%; // Size:15px;
+}
+p {
+	font-size:93.75%; // Size:15px;
+}
+a {
+	text-decoration:none;
+	color:$Primary;
+}
+ul {
+	list-style-type:none;
+	li {
+
+	}
+}

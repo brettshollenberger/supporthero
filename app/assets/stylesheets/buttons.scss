@@ -1,0 +1,15 @@
+@import 'constants';
+
+button {
+  &.green {
+    background-color: $green;
+  }
+
+  &.pink {
+    background-color: $pink;
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+}

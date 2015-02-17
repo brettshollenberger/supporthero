@@ -1,0 +1,21 @@
+@import 'shared.scss';
+
+// Styles specific to base button styling. If you are looking for the
+// general form input styling it is in forms.scss.
+
+.button, button, [type="submit"], [type="reset"] {
+	cursor:pointer;
+	&.success {
+		background:$Green;
+	}
+	&.warning {
+		background:$Yellow;
+	}
+	&.error {
+		background:$Red;
+	}
+	&:hover {
+    box-shadow:0 0 3px 0 rgba(25,25,25,0.1);
+	}
+
+}
