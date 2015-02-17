@@ -1,0 +1,37 @@
+{
+  "name": "Eris-Framework",
+  "version": "0.0.1",
+  "description": "A tiny, responsive CSS framework with AngularJS directives",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Aktof/eris-framework.git"
+  },
+  "keywords": [
+    "CSS",
+    "Framework",
+    "AngularJS",
+    "Responsive"
+  ],
+  "author": "Shalom J Aptekar",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/Aktof/eris-framework/issues"
+  },
+  "homepage": "https://github.com/Aktof/eris-framework",
+  "devDependencies": {
+    "gulp": "~3.x.x",
+    "gulp-rename": "~1.2.0",
+    "gulp-minify-css": "~0.3.1",
+    "gulp-concat": "~2.2.0",
+    "gulp-uglify": "~0.2.1",
+    "gulp-notify": "~1.2.5",
+    "gulp-clean": "~0.2.4",
+    "gulp-ruby-sass": "~0.4.3",
+    "gulp-jshint": "~1.5.3",
+    "gulp-cache": "~0.1.3"
+  }
+}

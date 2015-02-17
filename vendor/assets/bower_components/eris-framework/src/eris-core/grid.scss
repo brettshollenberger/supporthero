@@ -1,0 +1,164 @@
+@import 'constants.scss';
+
+// This is the base for the grid styles in eris. It is defined from the 
+// smallest size to largest. This is done so that if styles don't apply 
+// to a certain devices screen size it won't be parsed.
+
+* {
+	box-sizing: border-box;
+}
+
+// Defines how large a row should be and how small block grid should work
+.row, .small-block-grid {
+	margin: 0 auto;
+  padding:0;
+	max-width: $large-breakpoint;
+  letter-spacing:-0.31em;
+	[class*=col-], > li {
+    letter-spacing:normal;
+		display: inline-block;
+		vertical-align:top;
+    padding: 0 $medium-padding;
+	}
+	&.collapse {
+		[class*="col-"], > li {
+			padding: 0;
+		}
+	}
+  &.centered {
+    text-align:center;
+  }
+}
+
+// Large grid starting with mobile and small grid sizes
+[class*="col-lg-"] {
+  width:100%;
+}
+.col-sm-1 {
+  width: 1/12 * 100%;
+}
+.col-sm-2 {
+  width: 2/12 * 100%;
+}
+.col-sm-3 {
+  width: 3/12 * 100%;
+}
+.col-sm-4 {
+  width: 4/12 * 100%;
+}
+.col-sm-5 {
+  width: 5/12 * 100%;
+}
+.col-sm-6 {
+  width: 6/12 * 100%;
+}
+.col-sm-7 {
+  width: 7/12 * 100%;
+}
+.col-sm-8 {
+  width: 8/12 * 100%;
+}
+.col-sm-9 {
+  width: 9/12 * 100%;
+}
+.col-sm-10 {
+  width: 10/12 * 100%;
+}
+.col-sm-11 {
+  width: 11/12 * 100%;
+}
+.col-sm-12 {
+  width: 100%;
+}
+
+// This is for small block grids - things you can add buttons to or images
+.small-block-grid {
+	&.even-2 {
+		li {
+			width: 1/2 * 100%;
+		}
+	}
+	&.even-3 {
+		li {
+			width: 1/3 * 100%;
+		}
+	}
+	&.even-4 {
+		li {
+			width: 1/4 * 100%;
+		}
+	}
+	&.even-5 {
+		li {
+			width: 1/5 * 100%;
+		}
+	}
+	&.even-6 {
+		li {
+			width: 1/6 * 100%;
+		}
+	}
+	&.even-7 {
+		li {
+			width: 1/7 * 100%;
+		}
+	}
+	&.even-8 {
+		li {
+			width: 1/8 * 100%;
+		}
+	}
+}
+
+
+@media screen and (min-width:$small-breakpoint) {
+  .col-lg-1 {
+    width: 1/12 * 100%;
+  }
+
+  .col-lg-2 {
+    width: 2/12 * 100%;
+  }
+
+  .col-lg-3 {
+    width: 3/12 * 100%;
+  }
+
+  .col-lg-4 {
+    width: 4/12 * 100%;
+  }
+
+  .col-lg-5 {
+    width: 5/12 * 100%;
+  }
+
+  .col-lg-6 {
+    width: 6/12 * 100%;
+  }
+
+  .col-lg-7 {
+    width: 7/12 * 100%;
+  }
+
+  .col-lg-8 {
+    width: 8/12 * 100%;
+  }
+
+  .col-lg-9 {
+    width: 9/12 * 100%;
+  }
+
+  .col-lg-10 {
+    width: 10/12 * 100%;
+  }
+
+  .col-lg-11 {
+    width: 11/12 * 100%;
+  }
+
+  .col-lg-12 {
+    width: 100%;
+  }
+}
+
+

@@ -1,3 +1,6 @@
 <div ng-repeat="date in week.dates">
-  <div calendar-date={{date}} ng-click="selectDate(date)"></div>
+  <div 
+   calendar-date={{date}} 
+   ng-class="{'inactive': date.month != month}"
+   ng-click="selectDate(date)"></div>
 </div>
