@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       resources :users, :only => [:index, :show]
       resources :calendar_dates, :only => [:index, :show]
       resources :availabilities, :only => [:index, :show, :create, :destroy]
-      resources :assignments, :only => [:index, :show, :create, :destroy]
+      resources :assignments, :only => [:index, :show, :create, :destroy, :update]
     end
   end
 end

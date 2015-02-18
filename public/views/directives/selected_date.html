@@ -13,10 +13,25 @@
 
   <div ng-show="selectedDate.assignment.reassign">
     <h5>Assign a Replacement</h5>
-    <select ng-options="availability.user.id as availability.user.fullName() for availability in selectedDate.availabilities" ng-model="assignedUser"></select>
-    <!-- <div ng-repeat="availability in selectedDate.availabilities"> -->
-    <!--   <p>{{availability.user | username}}</p> -->
-    <!-- </div> -->
+    <select 
+      ng-change="provideFeedback(selectedDate, assignedUserId)"
+      ng-model="assignedUserId">
+      <option 
+        ng-value="availability.user.id" 
+        ng-repeat="availability in selectedDate.availabilities">
+        {{availability.user.fullName()}}
+      </option>
+    </select>
+
+    <div ng-show="reassignmentFeedback">
+      {{reassignmentFeedback}}
+
+      <button ng-click="reassign(selectedDate, assignedUserId)">Submit</button>
+    </div>
+  </div>
+
+  <div ng-show="reassignedFeedback">
+    {{reassignedFeedback}}
   </div>
 </div>
 

@@ -14,11 +14,21 @@ module Api
       end
 
       def create
-        @assignment = Assignment.new(assignments_params)
+        @assignment = Assignment.new(assignment_params)
 
         render :show and return if @assignment.save
           
         render unprocessable_entity
+      end
+
+      def update
+        @assignment = Assignment.find(params[:id])
+
+        if @assignment.update(assignment_params)
+          render :show and return
+        else
+          render unprocessable_entity
+        end
       end
 
       def destroy
@@ -35,7 +45,7 @@ module Api
         params.permit(:user_id, :calendar_date_id)
       end
 
-      def assignments_params
+      def assignment_params
         params.permit(:user_id, :calendar_date_id)
       end
     end
