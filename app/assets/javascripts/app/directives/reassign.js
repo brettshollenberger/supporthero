@@ -56,12 +56,21 @@ angular
               creator_id: User.cached["current_user"].id,
               recipient_ids: [assignedUserId]
             })
-            .subscribe(function(response) {
-              console.log(response);
-            });
           }
 
           scope.selectedDate.assignment.reassign = false;
+
+          deleteUsersAvailability(scope.selectedDate.availabilities);
+        }
+
+        function deleteUsersAvailability(availabilities) {
+          var availability = _.select(availabilities, function(a) { 
+            return a.user == User.cached["current_user"]; 
+          })[0];
+
+          if (!_.isUndefined(availability)) {
+            availability.$delete();
+          }
         }
 
         function userCanWork(selectedDate, userId) {
