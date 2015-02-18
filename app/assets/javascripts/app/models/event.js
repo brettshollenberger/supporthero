@@ -17,6 +17,22 @@ angular
       }
 
       this.calendar_date = CalendarDate.new(this.calendar_date);
+
+      this.$delete = function() {
+        var subject = new Rx.Subject();
+
+        Event.cached.removeCached(this);
+
+        $.ajaxAsObservable({
+          method: "DELETE",
+          url: "api/v1/events/" + this.id
+        })
+        .subscribe(function(response) {
+          subject.onNext(response);
+        });
+
+        return subject;
+      }
     }
 
     Event.forCurrentUser = function() {

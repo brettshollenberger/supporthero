@@ -28,7 +28,7 @@ module Api
 
       def destroy
         rescue_401_or_404 do
-          @event = current_user.created_events.find(params[:id])
+          @event = Event.find(params[:id])
 
           render deleted and return if !@event.nil? && @event.destroy
           render not_permitted

@@ -5,7 +5,15 @@ angular
       scope: {},
       templateUrl: "views/directives/notifications.html",
       link: function(scope, element, attrs) {
-        scope.events = [];
+        scope.notifications = [];
+
+        scope.removeNotification = function(notification) {
+          var index = scope.notifications.indexOf(notification);
+
+          if (index > -1) {
+            scope.notifications.splice(index, 1);
+          }
+        }
 
         User
           .current_user()
@@ -13,7 +21,7 @@ angular
             Event
               .forCurrentUser()
               .subscribe(function(e) {
-                scope.events.push(e);
+                scope.notifications.push(e);
               });
           });
         }

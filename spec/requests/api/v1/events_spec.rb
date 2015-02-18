@@ -169,20 +169,6 @@ describe "Events API :" do
           expect(json.message).to eql("Resource successfully deleted.")
         end
       end
-
-      describe "When the user may not delete the availablity :" do
-        before(:each) do
-          delete api_v1_event_path(@other_users_request_to_switch)
-        end
-
-        it "is not a successful request" do
-          expect(response).to_not be_success
-        end
-
-        it "returns a message stating the event is not found" do
-          expect(json.error).to eql("Resource not found")
-        end
-      end
     end
   end
 end
