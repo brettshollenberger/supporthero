@@ -141,3 +141,34 @@
 .needs-assignment-indicator {
   background-color: $pink;
 }
+
+.availability-icon {
+  width: 20px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.selected-day-header,
+.support-hero-assignment,
+.reassignment-checkbox {
+  margin-bottom: $padding;
+}
+
+.reassignment-feedback {
+  border: 1px solid $medium-grey;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: $padding;
+  display: inline-block;
+  vertical-align: middle;
+
+  p {
+    display: inline;
+    vertical-align: middle;
+  }
+
+  button {
+    display: block;
+    margin-top: $padding/2;
+  }
+}

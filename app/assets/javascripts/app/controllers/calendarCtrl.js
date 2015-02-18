@@ -8,4 +8,6 @@ angular
       $scope.currentUser = user;
     });
 
+    User.all()
+
   }]);

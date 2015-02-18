@@ -36,6 +36,22 @@ angular
       return subject;
     }
 
+    User.all = function() {
+      var subject = new Rx.Subject();
+
+      $.ajaxAsObservable({
+        url: "api/v1/users"
+      })
+      .map(function(response) {
+        return User.new(response.data);
+      })
+      .subscribe(function(users) {
+        subject.onNext(users);
+      });
+
+      return subject;
+    }
+
     return User;
 
   }]);

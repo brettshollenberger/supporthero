@@ -1,0 +1,30 @@
+<h5>Assign a Replacement</h5>
+<select 
+  ng-change="provideFeedback(selectedDate, assignedUserId)"
+  ng-model="assignedUserId">
+
+  <optgroup label="Available">
+    <option 
+    ng-value="assignable.user.id" 
+    ng-repeat="assignable in assignableUsers.available">
+      {{assignable.user.fullName()}}
+    </option>
+  </optgroup>
+
+  <optgroup label="Unavailable">
+    <option 
+    ng-value="assignable.user.id" 
+    ng-repeat="assignable in assignableUsers.unavailable">
+      {{assignable.user.fullName()}}
+    </option>
+  </optgroup>
+</select>
+
+<div class="reassignment-feedback" ng-show="reassignmentFeedback">
+  <img 
+   class="availability-icon" 
+   ng-src="{{assignable ? 'assets/check_mark.png' : 'assets/x_mark.png'}}" style="width:20px;">
+  <p>{{reassignmentFeedback}}</p>
+
+  <button class="reassign-button" ng-click="reassign(selectedDate, assignedUserId)">Submit</button>
+</div>
