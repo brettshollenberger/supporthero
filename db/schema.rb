@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217090822) do
+ActiveRecord::Schema.define(version: 20150218071226) do
 
   create_table "assignments", force: true do |t|
     t.integer  "calendar_date_id", null: false
@@ -34,6 +34,29 @@ ActiveRecord::Schema.define(version: 20150217090822) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "day_of_week", null: false
+  end
+
+  create_table "event_recipients", force: true do |t|
+    t.integer  "event_id",                     null: false
+    t.integer  "recipient_id",                 null: false
+    t.boolean  "dismissed",    default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "event_types", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events", force: true do |t|
+    t.integer  "eventable_id",   null: false
+    t.string   "eventable_type", null: false
+    t.integer  "event_type_id",  null: false
+    t.integer  "creator_id",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "holidays", force: true do |t|

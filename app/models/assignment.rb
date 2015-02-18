@@ -1,4 +1,5 @@
 class Assignment < ActiveRecord::Base
+  has_many   :events
   belongs_to :calendar_date
   belongs_to :user
 
