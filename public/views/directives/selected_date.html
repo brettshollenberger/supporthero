@@ -2,14 +2,21 @@
 <h6>{{selectedDate.day_of_week}}, {{selectedDate.month | month}} {{selectedDate.day}}</h6>
 
 <div ng-show="selectedDate.assignable">
-  <h5>Support Hero:</h5>
+  <h5>Support Hero</h5>
   <p>
   {{selectedDate.assignment.user | username}}
   </p>
 
-  <h5>Availabilities: </h5>
-  <div ng-repeat="availability in selectedDate.availabilities">
-    <p>{{availability.user | username}}</p>
+  <div ng-show="selectedDate.assignment.user == currentUser">
+    <input type="checkbox" ng-model="selectedDate.assignment.reassign">I cannot work
+  </div>
+
+  <div ng-show="selectedDate.assignment.reassign">
+    <h5>Assign a Replacement</h5>
+    <select ng-options="availability.user.id as availability.user.fullName() for availability in selectedDate.availabilities" ng-model="assignedUser"></select>
+    <!-- <div ng-repeat="availability in selectedDate.availabilities"> -->
+    <!--   <p>{{availability.user | username}}</p> -->
+    <!-- </div> -->
   </div>
 </div>
 

@@ -6,7 +6,7 @@ describe "Assignments API :" do
 
     @other_user = FactoryGirl.create(:user, id: 2, first_name: "User 2", last_name: "Two")
 
-    first_month = CalendarDate.where(month: 1, year: 2015)
+    first_month = CalendarDate.assignable.where(month: 1, year: 2015)
     first_five_days = first_month[0..4]
     next_five_days = first_month[5..9]
 
@@ -55,7 +55,7 @@ describe "Assignments API :" do
           expect(json.length).to eq(10)
           expect(json.first.user.first_name).to eq(user.first_name)
           expect(json.first.calendar_date.month).to eq(1)
-          expect(json.first.calendar_date.day_of_week).to eq("Thursday")
+          expect(json.first.calendar_date.day_of_week).to eq("Friday")
         end
       end
 
@@ -79,7 +79,7 @@ describe "Assignments API :" do
 
       describe "Filtering by calendar_date :" do
         before(:each) do
-          @first_date = CalendarDate.first
+          @first_date = CalendarDate.assignable.limit(1).first
           get api_v1_assignments_path, {calendar_date_id: @first_date.id}
         end
 

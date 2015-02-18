@@ -2,7 +2,8 @@ require "rails_helper"
 
 describe Assignment do
   let(:user)          { FactoryGirl.create(:user) }
-  let(:calendar_date) { CalendarDate.where(month: 1, day: 1, year: 2015).first }
+  let(:calendar_date) { CalendarDate.where(month: 1, day: 2, year: 2015).first }
+  let(:holiday)       { CalendarDate.where(month: 1, day: 1, year: 2015).first }
   let(:assignment)    { FactoryGirl.create(:assignment, user: user, calendar_date: calendar_date) }
 
   before(:all) do
@@ -42,6 +43,12 @@ describe Assignment do
       duplicate_assignment = Assignment.new(params)
 
       expect(duplicate_assignment).to_not be_valid
+    end
+
+    it "is not valid if created for a weekend or holiday" do
+      assignment_for_holiday = FactoryGirl.build(:assignment, :calendar_date => holiday, :user => user)
+
+      expect(assignment_for_holiday).to_not be_valid
     end
   end
 end

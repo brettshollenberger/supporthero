@@ -6,7 +6,7 @@ describe "Calendar Dates API :" do
 
     @other_user = FactoryGirl.create(:user, id: 2, first_name: "User 2", last_name: "Two")
 
-    first_month = CalendarDate.where(month: 1, year: 2015)
+    first_month = CalendarDate.assignable.where(month: 1, year: 2015)
     first_five_days = first_month[0..4]
     next_five_days = first_month[5..9]
 
@@ -54,7 +54,7 @@ describe "Calendar Dates API :" do
           expect(json.length).to eq(365)
           expect(json.first.month).to eq(1)
           expect(json.first.day_of_week).to eq("Thursday")
-          expect(json.first.assignment.user.first_name).to eq user.first_name
+          expect(json.second.assignment.user.first_name).to eq user.first_name
         end
       end
 
