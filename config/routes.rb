@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :calendar_dates, :only => [:index, :show]
       resources :availabilities, :only => [:index, :show, :create, :destroy]
       resources :assignments, :only => [:index, :show, :create, :destroy, :update]
+      resources :events, :only => [:index, :create, :destroy]
     end
   end
 end

@@ -40,7 +40,6 @@ describe "Availabilities API :" do
     describe "When logged in :" do
       before(:each) do
         login(user)
-
       end
 
       describe "When no query params are passed :" do
