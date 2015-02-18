@@ -1,0 +1,10 @@
+@import 'constants';
+
+.notification {
+  padding: $padding;
+  border: 1px solid $medium-grey;
+  border-radius: 5px;
+  margin: $padding;
+  display: inline-block;
+  vertical-align: middle;
+}

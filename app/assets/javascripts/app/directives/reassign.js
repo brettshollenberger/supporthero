@@ -1,6 +1,6 @@
 angular
   .module('supporthero')
-  .directive('reassign', ['User', function(User) {
+  .directive('reassign', ['User', 'Event', function(User, Event) {
     return {
       scope: {
         selectedDate: '=date',
@@ -11,26 +11,28 @@ angular
           scope.assignedUserId       = undefined;
           scope.reassignmentFeedback = undefined;
 
-          var availableUsers  = _.map(scope.selectedDate.availabilities, function(a) { return a.user; }),
-              allUsers        = _.values(User.cached),
-              currentUser     = User.cached["current_user"],
-              assignableUsers = _.chain(allUsers)
-                                 .uniq()
-                                 .select(function(user) {
-                                   return user != currentUser;
-                                 })
-                                 .map(function(user) {
-                                   return {
-                                     available: _.include(availableUsers, user) ? "available" : "unavailable",
-                                     user: user
-                                   }
-                                 })
-                                 .groupBy(function(assignable) {
-                                   return assignable.available;
-                                 })
-                                 .value();
+          if (!_.isUndefined(scope.selectedDate)) {
+            var availableUsers  = _.map(scope.selectedDate.availabilities, function(a) { return a.user; }),
+                allUsers        = _.values(User.cached),
+                currentUser     = User.cached["current_user"],
+                assignableUsers = _.chain(allUsers)
+                                   .uniq()
+                                   .select(function(user) {
+                                     return user != currentUser;
+                                   })
+                                   .map(function(user) {
+                                     return {
+                                       available: _.include(availableUsers, user) ? "available" : "unavailable",
+                                       user: user
+                                     }
+                                   })
+                                   .groupBy(function(assignable) {
+                                     return assignable.available;
+                                   })
+                                   .value();
 
-          scope.assignableUsers = assignableUsers;
+            scope.assignableUsers = assignableUsers;
+          }
         });
 
         scope.provideFeedback = function(selectedDate, assignedUserId) {
@@ -47,6 +49,16 @@ angular
           if (userCanWork(selectedDate, assignedUserId)) {
             selectedDate.assignment.$update({user_id: assignedUserId});
           } else {
+            Event.$create({
+              event_type: "request to switch",
+              eventable_type: "Assignment",
+              eventable_id: selectedDate.assignment.id,
+              creator_id: User.cached["current_user"].id,
+              recipient_ids: [assignedUserId]
+            })
+            .subscribe(function(response) {
+              console.log(response);
+            });
           }
 
           scope.selectedDate.assignment.reassign = false;

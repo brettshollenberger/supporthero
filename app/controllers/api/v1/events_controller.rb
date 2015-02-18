@@ -7,9 +7,9 @@ module Api
         rescue_401_or_404 do
           if params.include?("recipient_id")
             @recipient = User.find(params["recipient_id"])
-            @events    = @recipient.received_events
+            @events    = @recipient.received_events.includes(:eventable)
           else
-            @events = Event.where(queryable_params)
+            @events = Event.where(queryable_params).includes(:eventable)
           end
         end
       end

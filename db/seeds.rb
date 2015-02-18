@@ -45,3 +45,7 @@ calendar_dates.zip([
     end
   end
 end
+
+["request to switch"].each do |event_type|
+  EventType.create(name: event_type)
+end

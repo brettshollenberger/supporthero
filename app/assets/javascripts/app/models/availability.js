@@ -10,7 +10,6 @@ angular
       }
 
       this.user = User.new(params.user);
-
     }
 
     return Availability;

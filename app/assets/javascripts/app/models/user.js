@@ -30,7 +30,9 @@ angular
           subject.onNext(user);
         });
       } else {
-        subject.onNext(user);
+        setTimeout(function() {
+          subject.onNext(User.cached["current_user"]);
+        }, 1);
       }
 
       return subject;

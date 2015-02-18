@@ -5,8 +5,8 @@ angular
     Createable(Assignment);
 
     function Assignment(params) {
-      this.id   = params.id;
-      this.user = User.new(params.user);
+      this.id           = params.id;
+      this.user         = User.new(params.user);
 
       this.$update = function(params) {
         var subject = new Rx.Subject();
