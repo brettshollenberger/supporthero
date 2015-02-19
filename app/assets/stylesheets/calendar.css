@@ -6,8 +6,14 @@
   padding: $padding/2;
 
   .paginator-container,
-  .calendar-month-year {
+  .calendar-month-year,
+  .today-button {
     vertical-align: middle;
+  }
+
+  .today-button {
+    float: right;
+    margin: 0;
   }
 
   .paginator-container {
@@ -96,7 +102,7 @@
   border-left: 0;
 }
 
-[selected-date] {
+[edit-date] {
   padding: $padding;
 }
 
@@ -171,4 +177,12 @@
     display: block;
     margin-top: $padding/2;
   }
+}
+
+[notification] {
+  cursor: pointer;
+}
+
+.notification.selected-notification {
+  background-color: $light-grey;
 }

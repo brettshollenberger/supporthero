@@ -1,8 +1,8 @@
 angular
   .module('supporthero')
-  .directive('selectedDate', ['User', function(User) {
+  .directive('editDate', ['User', function(User) {
     return {
-      templateUrl: "views/directives/selected_date.html",
+      templateUrl: "views/directives/edit_date.html",
       link: function(scope, element, attrs) {
       }
     }

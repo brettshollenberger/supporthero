@@ -46,7 +46,7 @@ angular
         }
 
         scope.reassign = function(selectedDate, assignedUserId) {
-          if (userCanWork(selectedDate, assignedUserId)) {
+          if (User.currentUserIsAdmin() || userCanWork(selectedDate, assignedUserId)) {
             selectedDate.assignment.$update({user_id: assignedUserId});
           } else {
             Event.$create({
@@ -59,6 +59,7 @@ angular
           }
 
           scope.selectedDate.assignment.reassign = false;
+          scope.reassignmentFeedback = undefined;
 
           deleteUsersAvailability(scope.selectedDate.availabilities);
         }

@@ -71,6 +71,21 @@ describe "Calendar Dates API :" do
           expect(json.length).to eq(31)
         end
       end
+
+      describe "When months array is passed :" do
+        before(:each) do
+          get api_v1_calendar_dates_path(months: [1, 2, 3], year: 2015)
+        end
+
+        it "It is a successful request" do
+          expect(response).to be_success
+        end
+
+        it "It responds with only calendar_dates in the given months" do
+          length_of_months = 31 + 28 + 31
+          expect(json.length).to eq(length_of_months)
+        end
+      end
     end
   end
 

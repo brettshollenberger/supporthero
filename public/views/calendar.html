@@ -22,8 +22,11 @@
         </ul>
       </div>
 
-      <div class="col-sm-9 calendar-month-year">
-        <h5 class="month-name">{{monthNumber | month}} <span class="normal-weight">{{year}}</h5>
+      <div class="col-sm-8 calendar-month-year">
+        <h5 class="month-name">{{monthNumber | month}} <span class="normal-weight">{{year}}</span></h5>
+      </div>
+      <div class="col-sm-1">
+        <button class="today-button pink" ng-click="selectDate(currentDate)">Today</button>
       </div>
     </div>
 
@@ -31,6 +34,6 @@
   </div>
 
   <div class="date-container col-sm-3">
-    <div selected-date={{selectedDate}} ng-show="!!selectedDate"></div>
+    <div edit-date={{selectedDate}} ng-show="!!selectedDate"></div>
   </div>
 </div>

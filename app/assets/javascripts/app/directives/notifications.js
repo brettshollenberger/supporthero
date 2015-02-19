@@ -2,7 +2,6 @@ angular
   .module('supporthero')
   .directive('notifications', ['Event', 'User', function(Event, User) {
     return {
-      scope: {},
       templateUrl: "views/directives/notifications.html",
       link: function(scope, element, attrs) {
         scope.notifications = [];
@@ -13,6 +12,13 @@ angular
           if (index > -1) {
             scope.notifications.splice(index, 1);
           }
+        }
+
+        scope.selectNotification = function(notification) {
+          debugger;
+          _.each(scope.notifications, function(notification) { notification.selected = false; });
+
+          notification.selected = true;
         }
 
         User

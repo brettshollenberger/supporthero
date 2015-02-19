@@ -13,6 +13,8 @@ angular
 
         scope.selectDate = function(date) {
           scope.selectedDate = date;
+          scope.monthNumber  = date.month;
+          scope.month        = scope.calendar.years[scope.year].months[scope.monthNumber];
         }
 
         scope.dateHasPassed = function(date) {

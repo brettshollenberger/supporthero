@@ -1,1 +1,7 @@
-<div class="notification" ng-include src="src"></div>
+<div 
+ class="notification" 
+ ng-include 
+ src="src" 
+ ng-class="{'selected-notification': notification.selected}"
+ ng-click="selectDate(notification.calendar_date); selectNotification(notification)">
+</div>

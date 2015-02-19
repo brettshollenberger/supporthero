@@ -46,6 +46,8 @@ calendar_dates.zip([
   end
 end
 
-["request to switch"].each do |event_type|
+EventType.delete_all
+
+["request to switch", "assigned shift", "assigned unavailable shift"].each do |event_type|
   EventType.create(name: event_type)
 end
