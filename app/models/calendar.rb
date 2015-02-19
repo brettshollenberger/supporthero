@@ -25,7 +25,7 @@ class Calendar
         CalendarDate.create(date)
       end
 
-      Holiday.create_holidays_for_year(2015)
+      Holiday.create_holidays_for_year(year)
     end
 
     def dates_in_year(year)

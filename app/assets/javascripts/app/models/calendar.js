@@ -7,8 +7,8 @@ angular
 
       this.loadYear = function(year) {
         if (_.isUndefined(this.years[year])) {
-          this.years[year] = new Year(year);
-          return this.years[year].load();
+          this.years[year] = new Year({year: year});
+          return this.years[year].load(this.years);
         }
       }
     }

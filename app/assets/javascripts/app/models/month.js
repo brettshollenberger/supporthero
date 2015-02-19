@@ -1,16 +1,20 @@
 angular
   .module('supporthero')
-  .factory('Month', ['Week', '$rootScope', function(Week, $rootScope) {
+  .factory('Month', ['Week', '$rootScope', 'Mixin', 'Functional.Collection',
+  function(Week, $rootScope, Mixin, FunctionalCollection) {
 
     function Month(options) {
       var startOfWeek = "Sunday";
 
-      this.dates = [];
-      this.weeks = [];
+      this.dates = Mixin([], FunctionalCollection);
+      this.weeks = Mixin([], FunctionalCollection);
 
       this.addDates = function() {
         var prevMonth = prevMonthDates.call(this),
             nextMonth = nextMonthDates.call(this);
+
+        this.dates.$removeAll();
+        this.weeks.$removeAll();
 
         _.each(_.flatten([prevMonth, this.currentMonth, nextMonth]), function(date) {
           this.dates.push(date);

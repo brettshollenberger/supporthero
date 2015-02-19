@@ -14,6 +14,7 @@ angular
         scope.selectDate = function(date) {
           scope.selectedDate = date;
           scope.monthNumber  = date.month;
+          scope.year         = date.year;
           scope.month        = scope.calendar.years[scope.year].months[scope.monthNumber];
         }
 
