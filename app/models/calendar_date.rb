@@ -10,11 +10,11 @@ class CalendarDate < ActiveRecord::Base
 
   before_create :set_day_of_week
 
-  scope :holiday,     -> { includes(:holiday).where.not(:holidays => {:calendar_date_id => nil}) }
-  scope :not_holiday, -> { includes(:holiday).where(:holidays => {:calendar_date_id => nil}) }
-  scope :weekend,     -> { where("day_of_week IN (?)", weekend_days) }
-  scope :not_weekend, -> { where("day_of_week NOT IN (?)", weekend_days) }
-  scope :assignable,  -> { not_holiday.not_weekend }
+  scope :holiday,     ->    { includes(:holiday).where.not(:holidays => {:calendar_date_id => nil}) }
+  scope :not_holiday, ->    { includes(:holiday).where(:holidays => {:calendar_date_id => nil}) }
+  scope :weekend,     ->    { where("day_of_week IN (?)", weekend_days) }
+  scope :not_weekend, ->    { where("day_of_week NOT IN (?)", weekend_days) }
+  scope :assignable,  ->    { not_holiday.not_weekend }
 
   def self.weekend_days
     %w(Saturday Sunday)

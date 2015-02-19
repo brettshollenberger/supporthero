@@ -74,7 +74,7 @@ describe "Calendar Dates API :" do
 
       describe "When months array is passed :" do
         before(:each) do
-          get api_v1_calendar_dates_path(months: [1, 2, 3], year: 2015)
+          get api_v1_calendar_dates_path(month: "1,2,3", year: 2015)
         end
 
         it "It is a successful request" do
