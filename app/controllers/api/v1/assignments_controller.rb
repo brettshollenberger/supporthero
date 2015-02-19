@@ -16,15 +16,16 @@ module Api
       def create
         @assignment = Assignment.new(assignment_params)
 
-        render :show and return if @assignment.save
+        render :show and return if persist_assignment
           
         render unprocessable_entity
       end
 
       def update
         @assignment = Assignment.find(params[:id])
+        @assignment.assign_attributes(assignment_params)
 
-        if @assignment.update(assignment_params)
+        if persist_assignment
           render :show and return
         else
           render unprocessable_entity
@@ -47,6 +48,28 @@ module Api
 
       def assignment_params
         params.permit(:user_id, :calendar_date_id)
+      end
+
+      def persist_assignment(&block)
+        changed_user = @assignment.user_id_changed?
+
+        valid = @assignment.save
+
+        create_change_event if valid && changed_user
+
+        valid
+      end
+
+      def create_change_event
+        if @assignment.calendar_date.availabilities.map(&:user).include?(@assignment.user)
+          event_type_name = "assigned shift"
+        else
+          event_type_name = "assigned unavailable shift"
+        end
+
+        event_type = EventType.where(name: event_type_name).first
+        event      = Event.create(eventable: @assignment, creator: current_user, event_type: event_type)
+        EventRecipient.create(event: event, recipient: @assignment.user)
       end
     end
   end

@@ -20,6 +20,11 @@ describe "Assignments API :" do
 
     @assignment = Assignment.first
     @other_users_assignment = Assignment.last
+
+    FactoryGirl.create(:availability, calendar_date: @other_users_assignment.calendar_date, user: user)
+
+    EventType.create(name: "assigned shift")
+    EventType.create(name: "assigned unavailable shift")
   end
 
   describe "Index Action :" do
@@ -164,6 +169,62 @@ describe "Assignments API :" do
 
         it "It renders the recently created assignment" do
           expect(json.user.first_name).to eql(user.first_name)
+        end
+
+        it "It creates an event for the assigned user if they were unavailable" do
+          event = user.received_events.first
+
+          expect(event.event_type.name).to eq "assigned unavailable shift"
+          expect(event.eventable).to eq user.assignments.last
+        end
+      end
+    end
+  end
+
+  describe "Update Action :" do
+    before(:each) do
+      def valid_assignment_json
+        { :format => :json, :user_id => user.id }
+      end
+    end
+
+    describe "When not logged in :" do
+      before(:each) do
+        put api_v1_assignment_path(@other_users_assignment), valid_assignment_json
+      end
+
+      it "is not a successful request" do
+        expect(response).to_not be_success
+      end
+
+      it "renders the login message" do
+        expect(json.error).to eql("You need to sign in or sign up before continuing.")
+      end
+    end
+
+    describe "When logged in :" do
+      before(:each) do
+        login(user)
+      end
+
+      describe "If I create a valid assignment :" do
+        before(:each) do
+          put api_v1_assignment_path(@other_users_assignment), valid_assignment_json
+        end
+
+        it "It is a successful request" do
+          expect(response).to be_success
+        end
+
+        it "It renders the recently updated assignment" do
+          expect(json.user.first_name).to eql(user.first_name)
+        end
+
+        it "It creates an event for the assigned user" do
+          event = user.received_events.first
+
+          expect(event.event_type.name).to eq "assigned shift"
+          expect(event.eventable).to eq user.assignments.last
         end
       end
     end
