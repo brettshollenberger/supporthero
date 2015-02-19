@@ -28,6 +28,25 @@ angular
       }
     }
 
+    Availability.$create = function(params) {
+      var subject = new Rx.Subject();
+
+      $.ajaxAsObservable({
+        method: "POST",
+        url: "api/v1/availabilities",
+        data: params
+      })
+      .map(function(response) {
+        return response.data;
+      })
+      .subscribe(function(e) {
+        var instance = Availability.new(e);
+        subject.onNext(instance);
+      });
+
+      return subject;
+    }
+
     return Availability;
 
   }]);
