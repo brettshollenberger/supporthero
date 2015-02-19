@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'devise'
 gem 'bower-rails'
+gem 'unicorn'
 
 group :development, :test do
   gem "pry"

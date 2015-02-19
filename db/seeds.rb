@@ -1,3 +1,9 @@
+(2013..2017).each do |year|
+  if year && CalendarDate.where(year: year).empty?
+    Calendar.create_dates_in_year(year)
+  end
+end
+
 unless User.count > 1
   ["Sherry Pace", "Boris Gardner", "Vicente Taggart", "Matte Aptekar", "Jack Cassel",
    "Kevin Jenkins", "Zoe Dholakia", "Jay Wilds", "Eadon Eastman", "Franky Weber", "Luis Helene",
@@ -8,6 +14,12 @@ unless User.count > 1
      User.create(first_name: first_name, last_name: last_name, email: email, password: "foobar15")
    end
 end
+
+User.create(first_name: "Stephen", 
+            last_name: "Rogers", 
+            email: "stephen@newrelic.com", 
+            password: "foobar15", 
+            admin: true)
 
 Assignment.delete_all
 
