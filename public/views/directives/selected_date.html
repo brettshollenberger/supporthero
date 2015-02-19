@@ -6,18 +6,32 @@
 <div ng-show="selectedDate.assignable">
   <div class="support-hero-assignment">
     <h5>Support Hero</h5>
-    <p>
+    <p ng-show="selectedDate.assignment">
     {{selectedDate.assignment.user | username}}
+    </p>
+    <p ng-hide="selectedDate.assignment">
+      None
     </p>
   </div>
 
-  <div class="reassignment-checkbox" ng-show="selectedDate.assignment.user == currentUser">
-    <input type="checkbox" ng-model="selectedDate.assignment.reassign">I cannot work
+  <p ng-show="dateHasPassed(selectedDate)">
+    This date has already passed
+  </p>
+
+  <div ng-show="dateHasNotPassed(selectedDate)">
+    <div class="reassignment-checkbox" ng-show="selectedDate.assignment.user == currentUser">
+      <input type="checkbox" ng-model="selectedDate.assignment.reassign">I cannot work
+    </div>
+
+    <div 
+      availability-checkbox 
+      date="selectedDate" 
+      current-user="currentUser" 
+      ng-show="!currentUserIsAdmin() && selectedDate.assignment.user != currentUser">
+    </div>
+
+    <div reassign date="selectedDate" ng-show="currentUserIsAdmin() || selectedDate.assignment.reassign"></div>
   </div>
-
-  <div availability-checkbox date="selectedDate" current-user="currentUser" ng-show="selectedDate.assignment.user != currentUser"></div>
-
-  <div reassign date="selectedDate" ng-show="selectedDate.assignment.reassign"></div>
 </div>
 
 <div ng-show="selectedDate.holiday">

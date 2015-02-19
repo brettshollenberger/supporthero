@@ -15,6 +15,23 @@ angular
           scope.selectedDate = date;
         }
 
+        scope.dateHasPassed = function(date) {
+          if (_.isUndefined(date)) { return; }
+
+          return !scope.dateHasNotPassed(date);
+        }
+
+        scope.dateHasNotPassed = function(date) {
+          if (_.isUndefined(date)) { return; }
+
+          var date  = new Date(date.month + "-" + date.day + "-" + date.year),
+              today = new Date();
+
+          today.setHours(0, 0, 0, 0);
+
+          return date >= today;
+        }
+
         scope
           .calendar
           .loadYear(scope.year)

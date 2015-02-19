@@ -87,9 +87,13 @@ angular
         }
 
         function userCannotWorkMessage(userId) {
-          var user = findUser(userId);
+          var user                = findUser(userId),
+              notAvailable        = user.fullName() + " is not available to work.",
+              normalUserMessage   = "Click submit to ask " + user.first_name + " to cover the shift.",
+              adminMessage        = "If you assign " + user.first_name + ", " + user.first_name + " will receive a notification.",
+              userSpecificMessage = User.currentUserIsAdmin() ? adminMessage : normalUserMessage;
 
-          return user.fullName() + " is not available to work. Click submit to ask " + user.first_name + " to cover the shift.";
+          return notAvailable + " " + userSpecificMessage;
         }
 
         function availableUserIds(selectedDate) {

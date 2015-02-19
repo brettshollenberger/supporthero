@@ -8,6 +8,8 @@ angular
       $scope.currentUser = user;
     });
 
-    User.all()
+    User.all();
+
+    $scope.currentUserIsAdmin = User.currentUserIsAdmin;
 
   }]);

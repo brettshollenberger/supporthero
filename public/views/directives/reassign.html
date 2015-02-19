@@ -1,4 +1,5 @@
-<h5>Assign a Replacement</h5>
+<h5 ng-show="selectedDate.assignment">Assign a Replacement</h5>
+<h5 ng-hide="selectedDate.assignment">Assign the Shift</h5>
 <select 
   ng-change="provideFeedback(selectedDate, assignedUserId)"
   ng-model="assignedUserId">

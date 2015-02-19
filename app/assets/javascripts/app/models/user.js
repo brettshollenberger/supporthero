@@ -2,6 +2,8 @@ angular
   .module('supporthero')
   .factory('User', ['Createable', function(Createable) {
 
+    var admin = false;
+
     Createable(User);
 
     function User(params) {
@@ -25,6 +27,8 @@ angular
           return User.new(response.data);
         })
         .subscribe(function(user) {
+          admin = user.admin;
+
           User.cached["current_user"] = user;
 
           subject.onNext(user);
@@ -52,6 +56,10 @@ angular
       });
 
       return subject;
+    }
+
+    User.currentUserIsAdmin = function() {
+      return admin;
     }
 
     return User;
