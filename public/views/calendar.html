@@ -14,10 +14,10 @@
       <div class="paginator-container col-sm-3">
         <ul class="paginator small-block-grid even-2">
           <li>
-            <button prev-month month={{monthNumber}} class="pink full">Previous</button>
+            <button prev-month month={{monthNumber}} class="pink full" ng-disabled="noPreviousMonth()">Previous</button>
           </li>
           <li>
-            <button next-month month={{monthNumber}} class="pink full">Next</button>
+            <button next-month month={{monthNumber}} class="pink full" ng-disabled="noNextMonth()">Next</button>
           </li>
         </ul>
       </div>

@@ -46,7 +46,20 @@ angular
             scope.currentDate = scope.selectedDate;
             scope.month = year.months[scope.monthNumber];
             scope.$apply();
+
+            if (scope.monthNumber <= 2) {
+              scope
+              .calendar
+              .loadYear(scope.year-1)
+            }
+
+            if (scope.monthNumber >= 11) {
+              scope
+              .calendar
+              .loadYear(scope.year+1)
+            }
           });
+
       }
     }
   }]);

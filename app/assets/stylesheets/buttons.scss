@@ -12,4 +12,9 @@ button {
   &:focus {
     box-shadow: none;
   }
+
+  &:disabled {
+    background-color: $medium-grey;
+    color: $dark-grey;
+  }
 }

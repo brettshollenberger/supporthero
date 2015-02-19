@@ -19,6 +19,18 @@ angular
 
           scope.$apply();
         });
+
+        scope.noPreviousMonth = function() {
+          var monthNumber = scope.monthNumber-1,
+              year = scope.year;
+
+          if (monthNumber === 0) {
+            monthNumber = 12;
+            year -= 1;
+          }
+
+          return _.isUndefined(scope.calendar) || _.isEmpty(scope.calendar.years[year].months[monthNumber].dates);
+        }
       }
     }
   }]);
