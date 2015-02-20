@@ -1,6 +1,6 @@
 angular
   .module('supporthero')
-  .directive('reassign', ['User', 'Event', function(User, Event) {
+  .directive('reassign', ['User', 'Event', 'Assignment', function(User, Event, Assignment) {
     return {
       scope: {
         selectedDate: '=date',
@@ -47,7 +47,17 @@ angular
 
         scope.reassign = function(selectedDate, assignedUserId) {
           if (User.currentUserIsAdmin() || userCanWork(selectedDate, assignedUserId)) {
-            selectedDate.assignment.$update({user_id: assignedUserId});
+            if (_.isUndefined(selectedDate.assignment)) {
+              Assignment.$create({
+                user_id: assignedUserId,
+                calendar_date_id: selectedDate.id
+              }).subscribe(function(assignment) {
+                selectedDate.assignment = assignment;
+                scope.$apply();
+              });
+            } else {
+              selectedDate.assignment.$update({user_id: assignedUserId});
+            }
           } else {
             Event.$create({
               event_type: "request to switch",
@@ -58,7 +68,10 @@ angular
             })
           }
 
-          scope.selectedDate.assignment.reassign = false;
+          if (scope.selectedDate.assignment) {
+            scope.selectedDate.assignment.reassign = false;
+          }
+
           scope.reassignmentFeedback = undefined;
 
           deleteUsersAvailability(scope.selectedDate.availabilities);

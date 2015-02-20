@@ -39,6 +39,25 @@ angular
       }
     }
 
+    Assignment.$create = function(params) {
+      var subject = new Rx.Subject();
+
+      $.ajaxAsObservable({
+        method: "POST",
+        url: "api/v1/assignments",
+        data: params
+      })
+      .map(function(response) {
+        return response.data;
+      })
+      .subscribe(function(e) {
+        var instance = Assignment.new(e);
+        subject.onNext(instance);
+      });
+
+      return subject;
+    }
+
     return Assignment;
 
   }]);
