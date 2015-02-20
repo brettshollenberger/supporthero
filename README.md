@@ -11,7 +11,6 @@ rake db:create && db:migrate
 * Seeding Data:
 
 ```bash
-YEAR=2015 rake calendar:add_year
 rake db:seed
 ```
 
@@ -31,4 +30,8 @@ guard
 
 * Deployment instructions:
 
-  * Should add a job that adds new calendar dates yearly (`rake calendar:add_year YEAR=2015`)
+  * Run with Godfile to monitor the Unicorn master process
+
+```bash
+god -c ./supporthero.god
+```

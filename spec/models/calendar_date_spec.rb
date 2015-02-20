@@ -8,7 +8,7 @@ describe CalendarDate do
   end
 
   it "has a day" do
-    expect(calendar_date.day).to eq 1
+    expect(calendar_date.day).to eq 2
   end
 
   it "has a year" do
