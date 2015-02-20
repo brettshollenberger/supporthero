@@ -15,7 +15,6 @@ angular
         }
 
         scope.selectNotification = function(notification) {
-          debugger;
           _.each(scope.notifications, function(notification) { notification.selected = false; });
 
           notification.selected = true;
