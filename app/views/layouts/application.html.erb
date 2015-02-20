@@ -9,10 +9,9 @@
 </head>
 <body ng-app="supporthero">
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<div ng-view class="main-container">
+</div>
 
-<div ng-view class="main-container"></div>
 <%= yield %>
 
 </body>

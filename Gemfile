@@ -13,6 +13,7 @@ gem 'spring',        group: :development
 gem 'devise'
 gem 'bower-rails'
 gem 'unicorn'
+gem 'god'
 
 group :development, :test do
   gem "pry"
