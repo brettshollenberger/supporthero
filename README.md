@@ -26,8 +26,6 @@ Or watch for changes:
 guard
 ```
 
-* Services (job queues, cache servers, search engines, etc.)
-
 * Deployment instructions:
 
   * Run with Godfile to monitor the Unicorn master process
